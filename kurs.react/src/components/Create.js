@@ -1,10 +1,12 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 const Create = () => {
 	const [title, setTitle] = useState("");
 	const [body, setBody] = useState("");
 	const [author, setAuthor] = useState("mario");
 	const [isPending, setIsPending] = useState(false);
+	const navigate = useNavigate();
 
 	const handleSubmit = (e) => {
 		e.preventDefault();
@@ -19,6 +21,8 @@ const Create = () => {
 		}).then(() => {
 			alert("new blog added");
 			setIsPending(false);
+			// history.go(-1)
+			navigate("/");
 		});
 	};
 
@@ -46,7 +50,7 @@ const Create = () => {
 				</select>
 
 				{!isPending && <button>Add Blog</button>}
-                {isPending && <button disabled>Adding blog...</button>}
+				{isPending && <button disabled>Adding blog...</button>}
 
 				<p>{title}</p>
 				<p>{body}</p>
